@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeCasimos - Fresh Groceries & Market</title>
+    <meta name="description" content="Fresh groceries, organic produce, and quality meats delivered to your door. Shop DeCasimos for the best deals on farm-fresh food.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%); 
+            min-height: 100vh; 
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        header { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+
+        .logo { 
+            font-size: 2rem; 
+            font-weight: bold; 
+            color: #2d5016; 
+            text-decoration: none; 
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 500; 
+            transition: color 0.3s ease; 
+        }
+        .nav-links a:hover { color: #2d5016; }
+
+        .hero { text-align: center; padding: 4rem 0; color: white; }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); 
+        }
+        .hero p { 
+            font-size: 1.2rem; 
+            margin-bottom: 2rem; 
+            opacity: 0.9; 
+        }
+
+        .promotions { 
+            background: white; 
+            padding: 4rem 0; 
+            margin-top: -2rem; 
+            border-radius: 2rem 2rem 0 0; 
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1); 
+        }
+
+        .section-title { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            margin-bottom: 3rem; 
+            color: #333; 
+        }
+
+        .promo-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 2rem; 
+            margin-bottom: 3rem; 
+        }
+
+        .promo-card { 
+            border-radius: 1rem; 
+            padding: 2rem; 
+            color: white; 
+            text-align: center; 
+            transform: translateY(0); 
+            transition: all 0.3s ease; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            cursor: pointer;
+        }
+
+        .promo-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+        }
+        
+        .promo-image {
+            width: 100%;
+            max-height: 180px;    /* Smaller max height */
+            height: auto;         /* Let height adjust naturally */
+            object-fit: contain;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        .promo-card.produce { background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%); }
+        .promo-card.dairy { background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); }
+        .promo-card.bakery { background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%); }
+        .promo-card.meat { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+
+        .promo-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; }
+        .promo-discount { 
+            font-size: 3rem; 
+            font-weight: bold; 
+            margin: 1rem 0; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2); 
+        }
+        .promo-description { font-size: 1rem; margin-bottom: 1.5rem; opacity: 0.9; }
+
+        .promo-button { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: 2px solid white; 
+            padding: 0.8rem 2rem; 
+            border-radius: 2rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            display: inline-block; 
+        }
+        .promo-button:hover { background: white; color: #333; }
+
+        .features { background: #f8f9fa; padding: 4rem 0; }
+        .features-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .feature-card { 
+            text-align: center; 
+            padding: 2rem; 
+            background: white; 
+            border-radius: 1rem; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover { transform: translateY(-3px); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+        .footer { background: #333; color: white; text-align: center; padding: 2rem 0; }
+
+        .emergency-banner { 
+            background: linear-gradient(45deg, #e74c3c, #c0392b); 
+            color: white; 
+            text-align: center; 
+            padding: 1rem; 
+            font-weight: bold; 
+            animation: pulse 2s infinite; 
+        }
+
+        @keyframes pulse { 
+            0% { opacity: 1; } 
+            50% { opacity: 0.8; } 
+            100% { opacity: 1; } 
+        }
+
+        .api-info {
+            background: #e8f5e8;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: #2d5016;
+            text-align: center;
+            border-top: 1px solid #56ab2f;
+        }
+
+        @media (max-width: 768px) { 
+            .hero h1 { font-size: 2.5rem; } 
+            .nav-links { display: none; } 
+            .promo-grid { grid-template-columns: 1fr; } 
+            .promo-card { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                🛒 DeCasimos
+            </a>
+            <ul class="nav-links">
+                <li><a href="#promotions">Weekly Deals</a></li>
+                <li><a href="#products">Fresh Produce</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Locations</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Fresh Groceries & Market</h1>
+            <p>Farm-fresh produce, quality meats, and everyday essentials delivered to your door</p>
+        </div>
+    </section>
+
+    <section class="promotions" id="promotions">
+        <div class="container">
+            <h2 class="section-title">🛒 This Week's Fresh Deals</h2>
+            <div class="promo-grid" id="promo-grid">
+                
+                <div class="promo-card produce" >
+                  <img src="https://cdn3.decasim.com/image/7800008216" alt="#" class="promo-image" loading="lazy">
+                    <div class="promo-title">DR PEPPER CANS</div>
+                    <div class="promo-discount">5.26</div>
+                    <div class="promo-description"></div>
+                    <a href="" class="promo-button">Shop Now</a>
+                </div>
+            
+                <div class="promo-card dairy" >
+                  <img src="https://cdn3.decasim.com/image/1200000230" alt="#" class="promo-image" loading="lazy">
+                    <div class="promo-title">PEPSI 2 LITER BOTTLE</div>
+                    <div class="promo-discount">3.22</div>
+                    <div class="promo-description"></div>
+                    <a href="" class="promo-button">Shop Now</a>
+                </div>
+            
+                <div class="promo-card bakery" >
+                  <img src="https://cdn3.decasim.com/image/4046" alt="#" class="promo-image" loading="lazy">
+                    <div class="promo-title">AVOCADOS HASS 60CT</div>
+                    <div class="promo-discount">1.43</div>
+                    <div class="promo-description"></div>
+                    <a href="" class="promo-button">Shop Now</a>
+                </div>
+            
+                <div class="promo-card meat" >
+                  <img src="https://cdn3.decasim.com/image/1820061047" alt="#" class="promo-image" loading="lazy">
+                    <div class="promo-title">BUSCH BEER 12PK CAN</div>
+                    <div class="promo-discount">11.45</div>
+                    <div class="promo-description"></div>
+                    <a href="" class="promo-button">Shop Now</a>
+                </div>
+            
+                <div class="promo-card produce" >
+                  <img src="https://cdn3.decasim.com/image/2840019914" alt="#" class="promo-image" loading="lazy">
+                    <div class="promo-title">LAYS CLASSIC</div>
+                    <div class="promo-discount">3.74</div>
+                    <div class="promo-description"></div>
+                    <a href="" class="promo-button">Shop Now</a>
+                </div>
+            
+                <div class="promo-card dairy" >
+                  <img src="https://cdn3.decasim.com/image/3825910904" alt="#" class="promo-image" loading="lazy">
+                    <div class="promo-title">SEG SALTED BUTTER</div>
+                    <div class="promo-discount">4.33</div>
+                    <div class="promo-description"></div>
+                    <a href="" class="promo-button">Shop Now</a>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Shop at DeCasimos?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Free Delivery</h3>
+                    <p>Free same-day delivery on orders over $35. Fresh groceries to your doorstep!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥬</div>
+                    <h3>Farm Fresh</h3>
+                    <p>Locally sourced produce delivered fresh daily from trusted partner farms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Price Match</h3>
+                    <p>We'll match any competitor's price on identical items. Best value guarantee!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🕒</div>
+                    <h3>24/7 Shopping</h3>
+                    <p>Shop online anytime or visit our stores open early morning to late night.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 DeCasimos. All rights reserved. | Fresh Groceries & Market</p>
+            <div class="api-info">
+                🚀 Deployed via FastAPI + GitHub Actions | Last updated: 2025-08-20 20:37:25 | Deployment ID: c6fd1276-c577-4daf-af8a-9e6134382dc3
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamic content update functions
+        function updatePromotions(promotionsData) {
+            const promoGrid = document.getElementById('promo-grid');
+            if (!promoGrid) return;
+
+            promoGrid.innerHTML = '';
+            const cardClasses = ['produce', 'dairy', 'bakery', 'meat'];
+
+            promotionsData.forEach((promo, index) => {
+                const cardClass = cardClasses[index % cardClasses.length];
+
+                const promoCard = document.createElement('div');
+                promoCard.className = `promo-card ${cardClass}`;
+                promoCard.innerHTML = `
+                    <div class="promo-title">${promo.title}</div>
+                    <div class="promo-discount">${promo.discount}</div>
+                    <div class="promo-description">${promo.description}</div>
+                    <a href="${promo.link || '#'}" class="promo-button">${promo.button_text || 'Shop Now'}</a>
+                `;
+
+                promoGrid.appendChild(promoCard);
+            });
+        }
+
+        // Emergency banner management
+        function toggleEmergencyBanner(show, message = '') {
+            let banner = document.querySelector('.emergency-banner');
+
+            if (show && !banner) {
+                banner = document.createElement('div');
+                banner.className = 'emergency-banner';
+                document.body.insertBefore(banner, document.body.firstChild);
+            }
+
+            if (banner) {
+                if (show) {
+                    banner.innerHTML = message;
+                    banner.style.display = 'block';
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+        }
+
+        // Smooth navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Log successful load
+        console.log('🛒 DeCasimos Grocery Website loaded successfully!');
+        console.log('🚀 Deployed via FastAPI + GitHub Actions');
+        console.log('📦 Deployment ID: c6fd1276-c577-4daf-af8a-9e6134382dc3');
+    </script>
+</body>
+</html>
